@@ -11,7 +11,7 @@
                 </script>
                 <a href="#" target="_blank"
                     class="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-300 hover:underline">
-                    Name of Institution
+                    {{ $siteSettings?->site_title ?  $siteSettings->site_title : 'Name of Institution' }}
                 </a>. All Rights Reserved.
             </div>
 

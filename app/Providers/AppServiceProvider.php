@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\Settings\SiteSettingRepository;
+use App\Repositories\Settings\SiteSettingRepositoryInterface;
+use App\Services\Settings\SiteSettingService;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            SiteSettingRepositoryInterface::class,
+            SiteSettingRepository::class
+        );
     }
 
     /**
@@ -19,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        View::composer(['layouts.app', 'layouts.guest'], function ($view): void {
+            $view->with('siteSettings', app(SiteSettingService::class)->getSettings());
+        });
     }
 }

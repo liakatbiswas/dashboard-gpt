@@ -16,7 +16,7 @@
     <meta content="Coderthemes" name="author">
 
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ $siteSettings?->favicon_url ?? asset('assets/images/logo/favicon.ico') }}" type="image/x-icon">
 
     <!-- App css -->
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css">
@@ -48,9 +48,7 @@
 
             <main class="grow p-4">
 
-                <div class="card p-6 min-h-screen flex flex-col items-center justify-center">
-                    <h2 class="text-4xl text-center">Main</h2>
-                </div>
+                {{ $slot }}
 
             </main>
 

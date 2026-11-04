@@ -1,4 +1,4 @@
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+<section class="w-full px-4 sm:px-6 lg:px-10 xl:px-12 2xl:px-16 py-6 sm:py-8">
     <div
         class="relative w-full h-100 sm:h-125 md:h-150 lg:h-162.5 overflow-hidden rounded-2xl shadow-2xl bg-slate-900 group">
 
@@ -12,23 +12,27 @@
 
                 <div class="absolute inset-x-0 bottom-6 sm:bottom-10 md:bottom-16 flex justify-center px-4 sm:px-6">
                     <div
-                        class="max-w-2xl w-full backdrop-blur-md bg-white/5 border border-white/20 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-                        <span
-                            class="inline-block px-3 sm:px-4 py-1 mb-3 sm:mb-4 text-[10px] sm:text-xs font-bold tracking-widest uppercase bg-amber/90 text-ink rounded-full">
-                            Built for modern teams
-                        </span>
+                        class="max-w-3xl w-full backdrop-blur-md bg-white/5 border border-white/20 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                        <p class="mb-3 sm:mb-4 text-xs sm:text-sm font-bold tracking-widest uppercase text-amber">
+                            Academic Excellence &middot; NCTB Curriculum
+                        </p>
                         <h1
                             class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-3 sm:mb-4 tracking-tight">
-                            Plan, build, and <span class="text-amber">ship together</span>
+                            Plan, learn, and <span class="text-amber">succeed together</span>
                         </h1>
                         <p
-                            class="text-slate-200 text-sm sm:text-base md:text-lg mb-5 sm:mb-8 max-w-lg mx-auto leading-relaxed">
-                            A single workspace that keeps your team aligned from first idea to final launch.
+                            class="text-slate-200 text-sm sm:text-base md:text-lg mb-5 sm:mb-8 max-w-xl mx-auto leading-relaxed">
+                            A unified school management and academic portal connecting educators, students, and
+                            guardians.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                            <a href="#contact"
+                            <a href="{{ route('dashboard') }}"
                                 class="px-6 sm:px-8 py-3 sm:py-4 bg-amber hover:bg-white text-ink font-bold rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-amber/20 transform hover:-translate-y-1 text-sm sm:text-base">
-                                Get Started Free
+                                Open Dashboard
+                            </a>
+                            <a href="#contact"
+                                class="px-6 sm:px-8 py-3 sm:py-4 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl sm:rounded-2xl border border-white/25 transition-all duration-300 text-sm sm:text-base">
+                                Contact Us
                             </a>
                         </div>
                     </div>
@@ -43,23 +47,22 @@
 
                 <div class="absolute inset-x-0 bottom-6 sm:bottom-10 md:bottom-16 flex justify-center px-4 sm:px-6">
                     <div
-                        class="max-w-2xl w-full backdrop-blur-md bg-white/5 border border-white/20 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-                        <span
-                            class="inline-block px-3 sm:px-4 py-1 mb-3 sm:mb-4 text-[10px] sm:text-xs font-bold tracking-widest uppercase bg-amber/90 text-ink rounded-full">
-                            Built for modern teams
-                        </span>
+                        class="max-w-3xl w-full backdrop-blur-md bg-white/5 border border-white/20 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                        <p class="mb-3 sm:mb-4 text-xs sm:text-sm font-bold tracking-widest uppercase text-amber">
+                            Automated NCTB Grading &middot; Merit Tabulation
+                        </p>
                         <h1
                             class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-3 sm:mb-4 tracking-tight">
-                            Plan, build, and <span class="text-amber">ship together</span>
+                            Smart digital <span class="text-amber">result management</span>
                         </h1>
                         <p
-                            class="text-slate-200 text-sm sm:text-base md:text-lg mb-5 sm:mb-8 max-w-lg mx-auto leading-relaxed">
-                            A single workspace that keeps your team aligned from first idea to final launch.
+                            class="text-slate-200 text-sm sm:text-base md:text-lg mb-5 sm:mb-8 max-w-xl mx-auto leading-relaxed">
+                            Instant GPA calculation, combined paper evaluation, and automated class merit rankings.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                            <a href="#contact"
+                            <a href="/exam-results"
                                 class="px-6 sm:px-8 py-3 sm:py-4 bg-amber hover:bg-white text-ink font-bold rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-amber/20 transform hover:-translate-y-1 text-sm sm:text-base">
-                                Get Started Free
+                                View Merit Results
                             </a>
                         </div>
                     </div>
@@ -74,23 +77,22 @@
 
                 <div class="absolute inset-x-0 bottom-6 sm:bottom-10 md:bottom-16 flex justify-center px-4 sm:px-6">
                     <div
-                        class="max-w-2xl w-full backdrop-blur-md bg-white/5 border border-white/20 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
-                        <span
-                            class="inline-block px-3 sm:px-4 py-1 mb-3 sm:mb-4 text-[10px] sm:text-xs font-bold tracking-widest uppercase bg-amber/90 text-ink rounded-full">
-                            Built for modern teams
-                        </span>
+                        class="max-w-3xl w-full backdrop-blur-md bg-white/5 border border-white/20 p-6 sm:p-8 md:p-10 rounded-2xl sm:rounded-3xl text-center shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+                        <p class="mb-3 sm:mb-4 text-xs sm:text-sm font-bold tracking-widest uppercase text-amber">
+                            Student Directory &middot; Online Admission
+                        </p>
                         <h1
                             class="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-3 sm:mb-4 tracking-tight">
-                            Plan, build, and <span class="text-amber">ship together</span>
+                            Empowering every <span class="text-amber">student's journey</span>
                         </h1>
                         <p
-                            class="text-slate-200 text-sm sm:text-base md:text-lg mb-5 sm:mb-8 max-w-lg mx-auto leading-relaxed">
-                            A single workspace that keeps your team aligned from first idea to final launch.
+                            class="text-slate-200 text-sm sm:text-base md:text-lg mb-5 sm:mb-8 max-w-xl mx-auto leading-relaxed">
+                            Streamlined student enrollment, class section organization, and role-based user access.
                         </p>
                         <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                            <a href="#contact"
+                            <a href="/students"
                                 class="px-6 sm:px-8 py-3 sm:py-4 bg-amber hover:bg-white text-ink font-bold rounded-xl sm:rounded-2xl transition-all duration-300 shadow-lg hover:shadow-amber/20 transform hover:-translate-y-1 text-sm sm:text-base">
-                                Get Started Free
+                                Student Directory
                             </a>
                         </div>
                     </div>
@@ -102,13 +104,15 @@
         <!-- Navigation Buttons -->
         <button id="prev-btn"
             class="absolute left-3 sm:left-4 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/10 hover:bg-amber backdrop-blur-md flex items-center justify-center text-white hover:text-ink transition-all duration-300 z-20 border border-white/10">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2.5"
+                viewBox="0 0 24 24">
                 <path d="M15 18l-6-6 6-6" />
             </svg>
         </button>
         <button id="next-btn"
             class="absolute right-3 sm:right-4 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-white/10 hover:bg-amber backdrop-blur-md flex items-center justify-center text-white hover:text-ink transition-all duration-300 z-20 border border-white/10">
-            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" stroke-width="2.5"
+                viewBox="0 0 24 24">
                 <path d="M9 18l6-6-6-6" />
             </svg>
         </button>

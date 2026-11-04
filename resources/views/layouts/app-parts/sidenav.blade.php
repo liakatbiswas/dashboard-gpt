@@ -4,13 +4,13 @@
     <a href="{{ route('dashboard') }}" class="logo-box">
         <!-- Light Brand Logo -->
         <div class="logo-light">
-            <img src="assets/images/logo-light.png" class="logo-lg h-6" alt="Light logo">
+            <img src="{{ $siteSettings?->light_logo_url ?? asset('assets/images/logo/logo-light.png') }}" class="logo-lg h-6" alt="Light logo">
             <img src="assets/images/logo-sm.png" class="logo-sm" alt="Small logo">
         </div>
 
         <!-- Dark Brand Logo -->
         <div class="logo-dark">
-            <img src="assets/images/logo-dark.png" class="logo-lg h-6" alt="Dark logo">
+            <img src="{{ $siteSettings?->dark_logo_url ?? asset('assets/images/logo/logo-dark.png') }}" class="logo-lg h-6" alt="Dark logo">
             <img src="assets/images/logo-sm.png" class="logo-sm" alt="Small logo">
         </div>
     </a>
@@ -26,28 +26,32 @@
         <ul class="menu" data-fc-type="accordion">
             <li class="menu-title">Menu</li>
 
-            <li class="menu-item">
+            @can('dashboard.view')
+                <li class="menu-item">
                 <a href="{{ route('dashboard') }}" class="menu-link">
                     <span class="menu-icon"><i class="mgc_home_3_line"></i></span>
                     <span class="menu-text"> Dashboard </span>
                 </a>
-            </li>
+                </li>
+            @endcan
 
-            <li class="menu-item">
+            @can('view', App\Models\SiteSetting::class)
+                <li class="menu-item">
                 <a href="javascript:void(0)" data-fc-type="collapse" class="menu-link">
                     <span class="menu-icon"><i class="mgc_building_2_line"></i></span>
-                    <span class="menu-text"> Project </span>
+                    <span class="menu-text"> Settings </span>
                     <span class="menu-arrow"></span>
                 </a>
 
                 <ul class="sub-menu hidden">
                     <li class="menu-item">
-                        <a href="#" class="menu-link">
-                            <span class="menu-text">List</span>
+                        <a href="{{ route('settings.edit') }}" class="menu-link">
+                            <span class="menu-text">Site Settings</span>
                         </a>
                     </li>
                 </ul>
-            </li>
+                </li>
+            @endcan
 
         </ul>
 
