@@ -4,18 +4,22 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
+use Tests\Concerns\CreatesSuperAdmin;
 use Tests\TestCase;
 
 class AuthenticationRedirectTest extends TestCase
 {
+    use CreatesSuperAdmin;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->withoutVite();
+        $this->seed(DatabaseSeeder::class);
     }
 
-    public function test_registration_opens_the_pending_page_without_granting_admin_access(): void
+    public function test_registration_opens_student_dashboard_without_granting_admin_access(): void
     {
         $this->seed(DatabaseSeeder::class);
 
@@ -26,17 +30,18 @@ class AuthenticationRedirectTest extends TestCase
             'password_confirmation' => 'new-account-password-123',
             'role' => 'super-admin',
             'permissions' => ['dashboard.view'],
-        ])->assertRedirect('/account/pending');
+        ])->assertRedirect('/student/dashboard');
 
         $user = User::query()->where('email', 'new-account@example.invalid')->firstOrFail();
         $this->assertAuthenticatedAs($user);
-        $this->assertSame(0, $user->roles()->count());
+        $this->assertTrue($user->hasRole('student'));
+        $this->assertSame(1, $user->roles()->count());
         $this->assertFalse($user->can('dashboard.view'));
 
         $this->withCookie(config('session.cookie'), session()->getId())
-            ->get('/account/pending')
+            ->get('/student/dashboard')
             ->assertOk()
-            ->assertSee('অনুমতির অপেক্ষায়')
+            ->assertSee('Student Dashboard')
             ->assertSee($user->email)
             ->assertSee('name="_token"', false);
     }
@@ -50,7 +55,7 @@ class AuthenticationRedirectTest extends TestCase
                 'password' => 'pending-account-password-123',
                 'password_confirmation' => 'pending-account-password-123',
             ])
-            ->assertRedirect('/account/pending')
+            ->assertRedirect('/student/dashboard')
             ->assertSessionMissing('url.intended');
     }
 
@@ -69,8 +74,7 @@ class AuthenticationRedirectTest extends TestCase
     public function test_administrator_still_logs_in_to_the_dashboard(): void
     {
         $this->seed(DatabaseSeeder::class);
-        $user = User::factory()->create();
-        $user->assignRole('admin');
+        $user = $this->createSuperAdmin();
 
         $this->post('/login', ['email' => $user->email, 'password' => 'password'])
             ->assertRedirect('/dashboard');
@@ -82,8 +86,7 @@ class AuthenticationRedirectTest extends TestCase
     public function test_authorized_user_keeps_an_intended_destination(): void
     {
         $this->seed(DatabaseSeeder::class);
-        $user = User::factory()->create();
-        $user->givePermissionTo('dashboard.view');
+        $user = $this->createSuperAdmin();
 
         $this->withSession(['url.intended' => url('/user/confirm-password')])
             ->post('/login', ['email' => $user->email, 'password' => 'password'])
@@ -95,15 +98,15 @@ class AuthenticationRedirectTest extends TestCase
         $this->get('/account/pending')->assertRedirect('/login');
     }
 
-    public function test_pending_page_opens_dashboard_after_permission_is_granted(): void
+    public function test_pending_page_opens_student_dashboard_after_student_role_is_granted(): void
     {
         $this->seed(DatabaseSeeder::class);
         $user = User::factory()->create();
         $this->actingAs($user)->get('/account/pending')->assertOk();
 
-        $user->givePermissionTo('dashboard.view');
+        $user->assignRole('student');
 
-        $this->actingAs($user->fresh())->get('/account/pending')->assertRedirect('/dashboard');
+        $this->actingAs($user->fresh())->get('/account/pending')->assertRedirect('/student/dashboard');
     }
 
     public function test_pending_users_cannot_access_protected_dashboard_or_settings(): void

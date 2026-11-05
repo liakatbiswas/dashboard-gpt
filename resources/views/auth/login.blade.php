@@ -16,7 +16,9 @@
                 </div>
                 <button type="submit" class="btn-primary w-full">Sign in<i class="mgc_arrow_right_line" aria-hidden="true"></i></button>
             </form>
+            @if ($registrationOpen && Route::has('register'))
             <p class="app-muted mt-6 border-t app-divider pt-5 text-center text-sm">Don't have an account? <a href="{{ route('register') }}" class="auth-link">Register</a></p>
+            @endif
         </div>
     </section>
 </x-guest-layout>

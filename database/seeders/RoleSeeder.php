@@ -2,35 +2,33 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        /* Create Roles */
-        $superAdmin = Role::findOrCreate('super-admin', 'web');
-        $admin = Role::findOrCreate('admin', 'web');
+        $owner = Role::findOrCreate(config('access.super_admin_role'), 'web');
+        $owner->givePermissionTo(Permission::query()->where('guard_name', 'web')->get());
 
-        $superAdmin->syncPermissions(Permission::all());
+        $student = Role::findOrCreate(config('access.student_role'), 'web');
+        $student->givePermissionTo(Permission::findOrCreate('student.dashboard.view', 'web'));
 
-        /* Admin */
-        $admin->syncPermissions([
-            'dashboard.view',
+        $legacyAdmin = Role::findOrCreate('admin', 'web');
+        if ($legacyAdmin->wasRecentlyCreated) {
+            $legacyAdmin->givePermissionTo([
+                'dashboard.view', 'user.view', 'user.create', 'user.update', 'user.assign-role',
+            ]);
+        }
 
-            // Users
-            'user.view',
-            'user.create',
-            'user.update',
-            'user.assign-role',
-        ]);
-
-        $this->command->info('Role created successfully.');
-
+        User::query()->doesntHave('roles')->chunkById(100, function (Collection $users) use ($student): void {
+            foreach ($users as $user) {
+                $user->assignRole($student);
+            }
+        });
     }
 }

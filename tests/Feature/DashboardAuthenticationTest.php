@@ -6,10 +6,13 @@ use App\Models\User;
 use Database\Seeders\DatabaseSeeder;
 use Laravel\Sanctum\Sanctum;
 use PragmaRX\Google2FA\Google2FA;
+use Tests\Concerns\CreatesSuperAdmin;
 use Tests\TestCase;
 
 class DashboardAuthenticationTest extends TestCase
 {
+    use CreatesSuperAdmin;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -125,13 +128,12 @@ class DashboardAuthenticationTest extends TestCase
     public function test_admin_dashboard_has_logout_token_and_logout_succeeds(): void
     {
         $this->seed(DatabaseSeeder::class);
-        $user = User::factory()->create();
-        $user->assignRole('admin');
+        $user = $this->createSuperAdmin();
 
         $this->actingAs($user)->get('/dashboard')
             ->assertOk()
             ->assertSee('name="_token"', false)
-            ->assertDontSee('href="'.route('settings.edit').'"', false);
+            ->assertSee('href="'.route('settings.edit').'"', false);
 
         app()['env'] = 'local';
         $this->withSession(['_token' => 'test-logout-token'])

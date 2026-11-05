@@ -35,6 +35,22 @@
                     </a>
                 </li>
             @endcan
+            @if (auth()->user()->isSuperAdmin())
+                <li class="menu-title mt-5">Access management</li>
+                @foreach ([
+                    ['roles.index', 'roles.*', 'Roles', 'mgc_group_line'],
+                    ['permissions.index', 'permissions.*', 'Permissions', 'mgc_key_2_line'],
+                    ['registration.edit', 'registration.*', 'Student Registration', 'mgc_user_add_line'],
+                ] as [$target, $active, $text, $icon])
+                    <li class="menu-item">
+                        <a href="{{ route($target) }}" @class(['menu-link', 'active' => request()->routeIs($active)])
+                            @if (request()->routeIs($active)) aria-current="page" @endif>
+                            <span class="menu-icon"><i class="{{ $icon }}" aria-hidden="true"></i></span>
+                            <span class="menu-text">{{ $text }}</span>
+                        </a>
+                    </li>
+                @endforeach
+            @endif
             <li class="menu-title mt-5">Quick links</li>
             <li class="menu-item">
                 <a href="{{ route('home') }}" target="_blank" rel="noopener" class="menu-link">

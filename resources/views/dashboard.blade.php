@@ -16,6 +16,20 @@
             </div>
         </div>
 
+        <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            @foreach ([
+                ['roles.index', 'Roles', $roleCount, 'mgc_group_line'],
+                ['permissions.index', 'Permissions', $permissionCount, 'mgc_key_2_line'],
+                ['registration.edit', 'Registered students', $studentCount, 'mgc_user_3_line'],
+                ['registration.edit', 'Student registration', $registrationOpen ? 'Open' : 'Closed', 'mgc_user_add_line'],
+            ] as [$target, $label, $value, $icon])
+                <a href="{{ route($target) }}" class="app-panel p-5 transition-colors hover:border-indigo-400">
+                    <div class="flex items-center justify-between gap-3"><p class="app-muted text-xs">{{ $label }}</p><i class="{{ $icon }} text-lg text-indigo-500 dark:text-indigo-300" aria-hidden="true"></i></div>
+                    <p class="mt-3 text-2xl font-semibold">{{ $value }}</p>
+                </a>
+            @endforeach
+        </div>
+
         <section class="app-panel grid overflow-hidden lg:grid-cols-3" aria-labelledby="workspace-heading">
             <div class="p-6 sm:p-8 lg:col-span-2">
                 <span class="inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-xs font-medium text-indigo-700 dark:bg-indigo-500/15 dark:text-indigo-200">

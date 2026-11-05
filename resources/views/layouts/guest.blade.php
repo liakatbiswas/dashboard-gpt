@@ -42,7 +42,7 @@
     </main>
 
     {{-- ================= FOOTER ================= --}}
-    @if (request()->routeIs('login', 'register', 'password.*', 'two-factor.*', 'verification.*', 'account.pending'))
+    @if (request()->routeIs('login', 'register', 'password.*', 'two-factor.*', 'verification.*', 'account.pending', 'student.dashboard', 'register'))
         <footer class="app-muted border-t app-divider px-4 py-5 text-center text-xs">
             &copy; {{ date('Y') }} {{ $siteSettings?->site_title ?: 'School administration' }}. All rights reserved.
         </footer>

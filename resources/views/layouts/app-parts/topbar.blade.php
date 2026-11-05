@@ -5,7 +5,7 @@
 
     <div class="min-w-0 me-auto">
         <p class="app-muted hidden text-xs sm:block">{{ $siteSettings?->site_title ?: 'School administration' }}</p>
-        <p class="truncate text-sm font-semibold sm:text-base">{{ request()->routeIs('settings.*') ? 'Site Settings' : 'Dashboard' }}</p>
+        <p class="truncate text-sm font-semibold sm:text-base">{{ match (true) { request()->routeIs('settings.*') => 'Site Settings', request()->routeIs('roles.*') => 'Roles', request()->routeIs('permissions.*') => 'Permissions', request()->routeIs('registration.*') => 'Student Registration', default => 'Dashboard' } }}</p>
     </div>
 
     <a href="{{ route('home') }}" target="_blank" rel="noopener" class="btn-secondary hidden sm:inline-flex">

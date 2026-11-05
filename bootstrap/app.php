@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Access\AuthenticationDestination;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,9 +14,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->redirectUsersTo(fn (Request $request): string => $request->user()->can('dashboard.view')
-            ? route('dashboard')
-            : route('account.pending'));
+        $middleware->redirectUsersTo(fn (Request $request): string => app(AuthenticationDestination::class)->url($request->user()));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

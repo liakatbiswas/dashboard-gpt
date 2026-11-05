@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'super_admin_role' => 'super-admin',
+    'student_role' => 'student',
+    'protected_roles' => ['super-admin', 'student'],
+    'system_permissions' => [
+        'dashboard.view',
+        'settings.view',
+        'settings.update',
+        'settings.upload_media',
+        'user.view',
+        'user.create',
+        'user.update',
+        'user.delete',
+        'user.restore',
+        'user.force-delete',
+        'user.assign-role',
+        'role.view',
+        'role.create',
+        'role.update',
+        'role.delete',
+        'permission.view',
+        'permission.create',
+        'permission.update',
+        'permission.delete',
+        'student.dashboard.view',
+        'registration.manage',
+    ],
+];

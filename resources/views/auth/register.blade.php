@@ -2,8 +2,8 @@
     <section class="auth-section">
         <div class="auth-card">
             <div class="auth-icon"><i class="mgc_user_add_line" aria-hidden="true"></i></div>
-            <h1 class="text-2xl font-semibold tracking-tight">Create an account</h1>
-            <p class="app-muted mt-2 mb-7 text-sm">Enter your details to get started.</p>
+            <h1 class="text-2xl font-semibold tracking-tight">Create a student account</h1>
+            <p class="app-muted mt-2 mb-7 text-sm">Enter your details to create your student account.</p>
             <form method="POST" action="{{ route('register') }}" class="space-y-5">
                 @csrf
                 <x-form.input name="name" label="Full name" required autofocus autocomplete="name" maxlength="255" />
