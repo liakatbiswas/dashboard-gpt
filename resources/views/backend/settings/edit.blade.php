@@ -98,7 +98,8 @@
 
                             <div
                                 class="bg-white dark:bg-gray-900 rounded-lg border border-dashed border-gray-300 dark:border-gray-600 p-4 h-32 flex items-center justify-center mb-4 relative overflow-hidden transition-colors">
-                                <img id="favicon_preview" src="{{ $setting->favicon_url }}"
+                                <img id="favicon_preview"
+                                    src="{{ $setting->favicon_url }}"
                                     class="h-12 w-12 object-contain group-hover:scale-110 transition-transform duration-300"
                                     alt="Favicon">
                             </div>
@@ -125,7 +126,8 @@
                             <!-- Light Logo-এর জন্য সব সময় হালকা ব্যাকগ্রাউন্ড রাখা হয়েছে যেন ডার্ক টেক্সট বোঝা যায় -->
                             <div
                                 class="bg-gray-100 rounded-lg border border-dashed border-gray-300 dark:border-gray-600 p-4 h-32 flex items-center justify-center mb-4 relative overflow-hidden transition-colors">
-                                <img id="light_logo_preview" src="{{ $setting->light_logo_url }}"
+                                <img id="light_logo_preview"
+                                    src="{{ $setting->light_logo_url }}"
                                     class="max-h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-sm"
                                     alt="Light Mode Logo">
                             </div>
@@ -152,7 +154,8 @@
                             <!-- Dark Logo-এর জন্য সব সময় গাঢ় ব্যাকগ্রাউন্ড রাখা হয়েছে যেন লাইট টেক্সট বোঝা যায় -->
                             <div
                                 class="bg-gray-900 rounded-lg border border-dashed border-gray-600 p-4 h-32 flex items-center justify-center mb-4 relative overflow-hidden transition-colors">
-                                <img id="dark_logo_preview" src="{{ $setting->dark_logo_url }}"
+                                <img id="dark_logo_preview"
+                                    src="{{ $setting->dark_logo_url }}"
                                     class="max-h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
                                     alt="Dark Mode Logo">
                             </div>
