@@ -20,9 +20,9 @@
                     curiosity and strong foundations in Mathematics and Science.
                 </p>
                 <div class="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route(auth()->check() && auth()->user()->cannot('dashboard.view') ? 'account.pending' : 'dashboard') }}"
                         class="rounded-lg bg-indigo-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-indigo-700">
-                        Go to Dashboard
+                        {{ auth()->check() && auth()->user()->cannot('dashboard.view') ? 'Go to my account' : 'Go to Dashboard' }}
                     </a>
                     <a href="#contact"
                         class="rounded-lg border border-gray-300 px-6 py-3 text-sm font-semibold text-gray-700 transition-colors hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800">

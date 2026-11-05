@@ -1,41 +1,52 @@
 import Alpine from 'alpinejs';
 
-// ১. থিম ইনিশিয়ালাইজেশন ফাংশন (FOUC বা স্ক্রিন ফ্লিকার রোধে)
 export function initTheme() {
-    let theme = 'light';
-    try {
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || savedTheme === 'light') {
-            theme = savedTheme;
-        } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            theme = 'dark';
-        }
-    } catch (e) { }
-
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    return window.AppTheme?.get() ?? 'light';
 }
 
-// অবিলম্বে থিম ক্লাস সেট করুন
-initTheme();
-
-// ২. হেডার কম্পোনেন্টের স্টেট ও অ্যাকশন
 Alpine.data('headerNav', () => ({
     mobileMenuOpen: false,
-    theme: document.documentElement.classList.contains('dark') ? 'dark' : 'light',
+    theme: initTheme(),
+
+    init() {
+        window.addEventListener('app:theme-changed', (event) => {
+            this.theme = event.detail.theme;
+        });
+    },
 
     toggleTheme() {
-        this.theme = this.theme === 'dark' ? 'light' : 'dark';
-        document.documentElement.classList.toggle('dark', this.theme === 'dark');
-
-        try {
-            localStorage.setItem('theme', this.theme);
-        } catch (e) { }
+        window.AppTheme.toggle();
     },
 
     closeMobileMenu() {
         this.mobileMenuOpen = false;
-    }
+    },
 }));
+
+document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+    button.addEventListener('click', () => window.AppTheme.toggle());
+});
+
+document.querySelectorAll('[data-image-preview]').forEach((input) => {
+    input.addEventListener('change', () => {
+        const preview = document.getElementById(input.dataset.imagePreview);
+        const file = input.files?.[0];
+
+        if (!preview || !file) return;
+
+        const previousSource = preview.src;
+        const objectUrl = URL.createObjectURL(file);
+        const release = () => URL.revokeObjectURL(objectUrl);
+
+        preview.onload = release;
+        preview.onerror = () => {
+            release();
+            preview.onerror = null;
+            preview.src = previousSource;
+        };
+        preview.src = objectUrl;
+    });
+});
 
 window.Alpine = Alpine;
 Alpine.start();

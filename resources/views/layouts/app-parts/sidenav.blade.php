@@ -1,59 +1,47 @@
-<div class="app-menu">
-
-    <!-- Sidenav Brand Logo -->
-    <a href="{{ route('dashboard') }}" class="logo-box">
-        <!-- Light Brand Logo -->
+<aside class="app-menu" aria-label="Main navigation">
+    <a href="{{ route('dashboard') }}" class="logo-box" aria-label="Dashboard home">
         <div class="logo-light">
-            <img src="{{ $siteSettings?->light_logo_url ?? asset('assets/images/logo/logo-light.png') }}" class="logo-lg h-6" alt="Light logo">
-            <img src="assets/images/logo-sm.png" class="logo-sm" alt="Small logo">
+            <img src="{{ $siteSettings?->light_logo_url ?? asset('assets/images/logo/logo-light.png') }}" class="logo-lg h-7 max-w-44 object-contain" alt="{{ $siteSettings?->site_title ?: 'School' }}">
+            <img src="{{ asset('assets/images/logo-sm.png') }}" class="logo-sm" alt="School">
         </div>
-
-        <!-- Dark Brand Logo -->
         <div class="logo-dark">
-            <img src="{{ $siteSettings?->dark_logo_url ?? asset('assets/images/logo/logo-dark.png') }}" class="logo-lg h-6" alt="Dark logo">
-            <img src="assets/images/logo-sm.png" class="logo-sm" alt="Small logo">
+            <img src="{{ $siteSettings?->dark_logo_url ?? asset('assets/images/logo/logo-dark.png') }}" class="logo-lg h-7 max-w-44 object-contain" alt="{{ $siteSettings?->site_title ?: 'School' }}">
+            <img src="{{ asset('assets/images/logo-sm.png') }}" class="logo-sm" alt="School">
         </div>
     </a>
 
-    <!-- Sidenav Menu Toggle Button -->
-    <button id="button-hover-toggle" class="absolute top-5 inset-e-2 rounded-full p-1.5">
-        <span class="sr-only">Menu Toggle Button</span>
-        <i class="mgc_round_line text-xl"></i>
+    <button id="button-hover-toggle" type="button" class="absolute top-6 end-2 rounded-full p-1.5" aria-label="Toggle sidebar size">
+        <i class="mgc_round_line text-xl" aria-hidden="true"></i>
     </button>
 
-    <!--- Menu -->
-    <div class="srcollbar" data-simplebar>
-        <ul class="menu" data-fc-type="accordion">
-            <li class="menu-title">Menu</li>
-
+    <div data-simplebar>
+        <ul class="menu">
+            <li class="menu-title">Workspace</li>
             @can('dashboard.view')
                 <li class="menu-item">
-                <a href="{{ route('dashboard') }}" class="menu-link">
-                    <span class="menu-icon"><i class="mgc_home_3_line"></i></span>
-                    <span class="menu-text"> Dashboard </span>
-                </a>
+                    <a href="{{ route('dashboard') }}" @class(['menu-link', 'active' => request()->routeIs('dashboard')])
+                        @if (request()->routeIs('dashboard')) aria-current="page" @endif>
+                        <span class="menu-icon"><i class="mgc_home_3_line" aria-hidden="true"></i></span>
+                        <span class="menu-text">Dashboard</span>
+                    </a>
                 </li>
             @endcan
-
             @can('view', App\Models\SiteSetting::class)
                 <li class="menu-item">
-                <a href="javascript:void(0)" data-fc-type="collapse" class="menu-link">
-                    <span class="menu-icon"><i class="mgc_building_2_line"></i></span>
-                    <span class="menu-text"> Settings </span>
-                    <span class="menu-arrow"></span>
-                </a>
-
-                <ul class="sub-menu hidden">
-                    <li class="menu-item">
-                        <a href="{{ route('settings.edit') }}" class="menu-link">
-                            <span class="menu-text">Site Settings</span>
-                        </a>
-                    </li>
-                </ul>
+                    <a href="{{ route('settings.edit') }}" @class(['menu-link', 'active' => request()->routeIs('settings.*')])
+                        @if (request()->routeIs('settings.*')) aria-current="page" @endif>
+                        <span class="menu-icon"><i class="mgc_settings_3_line" aria-hidden="true"></i></span>
+                        <span class="menu-text">Site Settings</span>
+                    </a>
                 </li>
             @endcan
-
+            <li class="menu-title mt-5">Quick links</li>
+            <li class="menu-item">
+                <a href="{{ route('home') }}" target="_blank" rel="noopener" class="menu-link">
+                    <span class="menu-icon"><i class="mgc_external_link_line" aria-hidden="true"></i></span>
+                    <span class="menu-text">View website</span>
+                </a>
+            </li>
         </ul>
-
     </div>
-</div>
+</aside>

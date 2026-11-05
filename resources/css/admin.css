@@ -1,0 +1,4 @@
+@layer theme, base, konrix, components, utilities;
+
+@import '../../public/assets/css/app.min.css' layer(konrix);
+@import './app.css';

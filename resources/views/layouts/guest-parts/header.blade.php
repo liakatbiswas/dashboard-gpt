@@ -42,36 +42,36 @@
             <nav class="hidden items-center gap-1 md:flex">
                 <a href="{{ route('home') }}"
                     class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-indigo-400">
-                    <i class="mgc_home_3_line text-lg"></i>
+                    <i class="mgc_home_3_line text-lg" aria-hidden="true"></i>
                     <span>Home</span>
                 </a>
 
                 @guest
                     <a href="{{ route('login') }}"
                         class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-indigo-400">
-                        <i class="mgc_login_line text-lg"></i>
+                        <i class="mgc_enter_door_line text-lg" aria-hidden="true"></i>
                         <span>Login</span>
                     </a>
 
                     <a href="{{ route('register') }}"
                         class="ml-1 flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-indigo-700">
-                        <i class="mgc_user_add_line text-lg"></i>
+                        <i class="mgc_user_add_line text-lg" aria-hidden="true"></i>
                         <span>Register</span>
                     </a>
                 @endguest
 
                 @auth
-                    <a href="{{ route('dashboard') }}"
+                    <a href="{{ route(auth()->user()->can('dashboard.view') ? 'dashboard' : 'account.pending') }}"
                         class="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-100 hover:text-indigo-600 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-indigo-400">
-                        <i class="mgc_dashboard_3_line text-lg"></i>
-                        <span>Dashboard</span>
+                        <i class="mgc_dashboard_3_line text-lg" aria-hidden="true"></i>
+                        <span>{{ auth()->user()->can('dashboard.view') ? 'Dashboard' : 'My account' }}</span>
                     </a>
 
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
                         <button type="submit"
                             class="ml-1 flex items-center gap-2 rounded-lg bg-rose-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-rose-700 cursor-pointer">
-                            <i class="mgc_exit_line text-lg"></i>
+                            <i class="mgc_exit_line text-lg" aria-hidden="true"></i>
                             <span>Logout</span>
                         </button>
                     </form>
@@ -102,36 +102,36 @@
         <div class="flex w-full flex-col gap-1 px-4 py-4 sm:px-6">
             <a href="{{ route('home') }}" @click="closeMobileMenu()"
                 class="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800">
-                <i class="mgc_home_3_line text-lg"></i>
+                <i class="mgc_home_3_line text-lg" aria-hidden="true"></i>
                 <span>Home</span>
             </a>
 
             @guest
                 <a href="{{ route('login') }}" @click="closeMobileMenu()"
                     class="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800">
-                    <i class="mgc_login_line text-lg"></i>
+                    <i class="mgc_enter_door_line text-lg" aria-hidden="true"></i>
                     <span>Login</span>
                 </a>
 
                 <a href="{{ route('register') }}" @click="closeMobileMenu()"
                     class="mt-2 flex items-center justify-center gap-2 rounded-lg bg-indigo-600 px-3 py-3 text-sm font-medium text-white hover:bg-indigo-700">
-                    <i class="mgc_user_add_line text-lg"></i>
+                    <i class="mgc_user_add_line text-lg" aria-hidden="true"></i>
                     <span>Register</span>
                 </a>
             @endguest
 
             @auth
-                <a href="{{ route('dashboard') }}" @click="closeMobileMenu()"
+                <a href="{{ route(auth()->user()->can('dashboard.view') ? 'dashboard' : 'account.pending') }}" @click="closeMobileMenu()"
                     class="flex items-center gap-3 rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-800">
-                    <i class="mgc_dashboard_3_line text-lg"></i>
-                    <span>Dashboard</span>
+                    <i class="mgc_dashboard_3_line text-lg" aria-hidden="true"></i>
+                    <span>{{ auth()->user()->can('dashboard.view') ? 'Dashboard' : 'My account' }}</span>
                 </a>
 
                 <form method="POST" action="{{ route('logout') }}" class="mt-2">
                     @csrf
                     <button type="submit"
                         class="flex w-full items-center justify-center gap-2 rounded-lg bg-rose-600 px-3 py-3 text-sm font-medium text-white hover:bg-rose-700">
-                        <i class="mgc_exit_line text-lg"></i>
+                        <i class="mgc_exit_line text-lg" aria-hidden="true"></i>
                         <span>Logout</span>
                     </button>
                 </form>

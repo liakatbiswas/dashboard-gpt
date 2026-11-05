@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Backend\SiteSettingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PendingAccountController;
 use App\Models\SiteSetting;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,9 @@ Route::get('/', function () {
 })->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/account/pending', PendingAccountController::class)
+        ->name('account.pending');
+
     Route::get('/dashboard', DashboardController::class)
         ->middleware('can:dashboard.view')
         ->name('dashboard');

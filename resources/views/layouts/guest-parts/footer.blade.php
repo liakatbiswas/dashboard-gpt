@@ -30,9 +30,8 @@
                     <li><a href="#contact"
                             class="transition-colors hover:text-indigo-600 dark:hover:text-indigo-400">Contact</a>
                     </li>
-                    <li><a href="{{ route('dashboard') }}"
-                            class="transition-colors hover:text-indigo-600 dark:hover:text-indigo-400">Admin
-                            Dashboard</a>
+                    <li><a href="{{ route(auth()->check() && auth()->user()->cannot('dashboard.view') ? 'account.pending' : 'dashboard') }}"
+                            class="transition-colors hover:text-indigo-600 dark:hover:text-indigo-400">{{ auth()->check() && auth()->user()->cannot('dashboard.view') ? 'My account' : 'Admin Dashboard' }}</a>
                     </li>
                 </ul>
             </div>

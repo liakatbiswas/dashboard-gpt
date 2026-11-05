@@ -12,7 +12,19 @@ class UpdateSiteSettingRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return $this->user()->can('update', SiteSetting::class);
+        $user = $this->user();
+
+        if (! $user || ! $user->can('update', SiteSetting::class)) {
+            return false;
+        }
+
+        foreach (['favicon', 'light_logo', 'dark_logo'] as $field) {
+            if ($this->hasFile($field) && ! $user->can('settings.upload_media')) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

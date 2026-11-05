@@ -18,20 +18,21 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ $siteSettings?->favicon_url ?? asset('assets/images/logo/favicon.ico') }}" type="image/x-icon">
 
-    <!-- App css -->
-    <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <script src="{{ asset('assets/js/config.js') }}"></script>
+    <script src="{{ asset('assets/js/theme.js') }}"></script>
 
     <!-- Icons css -->
     <link href="{{ asset('assets/css/icons.min.css') }}" rel="stylesheet" type="text/css">
 
-    <!-- Theme Config Js -->
-    <script src="{{ asset('assets/js/config.js') }}"></script>
-
     <!-- Tailwind CSS -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/admin.css', 'resources/js/app.js'])
 </head>
 
-<body>
+<body class="admin-shell antialiased">
+
+    <a href="#main-content" class="skip-link">Skip to content</a>
 
     <!-- Begin page -->
     <div class="flex wrapper">
@@ -46,7 +47,7 @@
             @include('layouts.app-parts.topbar')
 
 
-            <main class="grow p-4">
+            <main id="main-content" class="grow p-4 sm:p-6 lg:p-8" tabindex="-1">
 
                 {{ $slot }}
 
@@ -60,7 +61,7 @@
     </div>
 
     <!-- Back to Top Button -->
-    <button data-toggle="back-to-top"
+    <button data-toggle="back-to-top" type="button" aria-label="Back to top"
         class="fixed hidden h-10 w-10 items-center justify-center rounded-full z-10 bottom-20 inset-e-14 p-2.5 bg-primary cursor-pointer shadow-lg text-white">
         <i class="mgc_arrow_up_line text-lg"></i>
     </button>
